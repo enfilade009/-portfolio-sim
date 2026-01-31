@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio Sim</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              nordic: {
+                slate: '#0F172A',      // Deep Navy/Charcoal (Primary Text)
+                charcoal: '#334155',   // Lighter Slate (Secondary Text)
+                oatmeal: '#F1F5F9',    // Cool Light Gray (App Background)
+                white: '#FFFFFF',      // Cards
+                sage: '#0D9488',       // Teal/Emerald (Success/Growth)
+                sageDark: '#115E59',   // Darker Teal
+                sageLight: '#CCFBF1',  // Light Teal Bg
+                terra: '#E11D48',      // Rose/Coral (Risk/Crisis)
+                terraDark: '#9F1239',  // Darker Rose
+                terraLight: '#FFE4E6', // Light Rose Bg
+                blue: '#3B82F6',       // Primary Action Blue
+                muted: '#E2E8F0'       // Borders
+              }
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            // Scaled up font sizes by ~25%
+            fontSize: {
+              xs: ['0.875rem', { lineHeight: '1.25rem' }],    
+              sm: ['1rem', { lineHeight: '1.5rem' }],         
+              base: ['1.125rem', { lineHeight: '1.75rem' }],  
+              lg: ['1.25rem', { lineHeight: '1.75rem' }],     
+              xl: ['1.5rem', { lineHeight: '2rem' }],         
+              '2xl': ['1.875rem', { lineHeight: '2.25rem' }],
+              '3xl': ['2.25rem', { lineHeight: '2.5rem' }],
+            },
+            boxShadow: {
+              'soft': '0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02)',
+              'card': '0 10px 15px -3px rgba(0, 0, 0, 0.03), 0 4px 6px -2px rgba(0, 0, 0, 0.02)',
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background-color: #F1F5F9;
+        color: #0F172A;
+      }
+      .dark body {
+        background-color: #0F172A;
+        color: #F1F5F9;
+      }
+      /* Custom scrollbar for minimalist feel */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #CBD5E1;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #94A3B8;
+      }
+      .dark ::-webkit-scrollbar-thumb {
+        background: #475569;
+      }
+      .dark ::-webkit-scrollbar-thumb:hover {
+        background: #64748B;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.34.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "recharts": "https://esm.sh/recharts@^3.6.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
