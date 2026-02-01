@@ -23,6 +23,10 @@ import { GoalAnalysis } from './components/GoalAnalysis';
 import { DividendEngine } from './components/DividendEngine';
 import { MarketDashboard } from './components/MarketDashboard';
 import { AlphaEngine } from './components/AlphaEngine';
+import { Paywall } from './components/Paywall';
+import { usePayment } from './contexts/PaymentContext';
+
+// Rich Income Templates for Family & Career
 
 // Rich Income Templates for Family & Career
 const INCOME_CATEGORIES = [
@@ -114,6 +118,8 @@ const DisclaimerModal: React.FC<{ onClose: () => void }> = ({ onClose }) => (
 type ActiveTab = 'forecast' | 'ladder' | 'market' | 'alpha';
 
 const App: React.FC = () => {
+  const { isPaid, isLoading } = usePayment();
+  
   // Navigation State
   const [activeTab, setActiveTab] = useState<ActiveTab>('forecast');
 
@@ -376,16 +382,7 @@ const App: React.FC = () => {
                <BrainCircuit size={16} /> Strategy <span className="hidden md:inline">& Tax</span>
             </button>
          </div>
-          <div className="ml-4 flex items-center gap-2"> <a
-            
-              href="https://buymeacoffee.com/enfilade009"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 text-white text-xs font-bold rounded-lg shadow-sm transition-all hover:scale-105"
-            >
-              <Heart size={14} fill="currentColor" />
-              <span>Support</span>
-            </a>
+          <div className="ml-4">
             <button 
               onClick={() => setIsDarkMode(!isDarkMode)}
               className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-slate-800 text-gray-500 dark:text-gray-400 transition-colors"
@@ -1118,15 +1115,15 @@ const App: React.FC = () => {
         </div>
       ) : activeTab === 'market' ? (
         <div className="flex-1 overflow-hidden animate-fade-in">
-           <MarketDashboard />
+          {isPaid ? <MarketDashboard /> : <Paywall feature="Market Dashboard" />}
         </div>
       ) : activeTab === 'alpha' ? (
         <div className="flex-1 overflow-hidden animate-fade-in">
-          <AlphaEngine />
+          {isPaid ? <AlphaEngine /> : <Paywall feature="Strategy & Tax" />}
         </div>
       ) : (
         <div className="flex-1 overflow-hidden animate-fade-in">
-           <DividendEngine />
+          {isPaid ? <DividendEngine /> : <Paywall feature="Dividend Ladder" />}
         </div>
       )}
     </div>
