@@ -70,7 +70,7 @@ const AlphaGuide = () => (
         </div>
       </div>
       <div className="space-y-3">
-        <div className=bg-white dark:bg-slate-800 p-3 rounded border border-gray-200">
+        <div className="bg-white dark:bg-slate-800 p-3 rounded border border-gray-200">
           <strong className="text-nordic-sage block mb-1">Thesis Confidence Score (0-100)</strong>
           <p className="text-gray-500 mb-2">
             A subjective measure YOU define. It answers: <em>"Does the original reason I bought this still exist?"</em>
