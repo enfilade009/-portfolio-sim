@@ -46,23 +46,23 @@ const SECTOR_RISK_PROFILE: Record<string, { vol: number, drawdown: number }> = {
 // --- SUB-COMPONENTS ---
 
 const AlphaGuide = () => (
-  <div className="bg-nordic-oatmeal p-5 rounded-xl border border-nordic-muted mb-6">
-    <h4 className="font-bold text-nordic-slate flex items-center gap-2 mb-3 text-sm">
+  <div className="bg-nordic-oatmeal dark:bg-slate-900 p-5 rounded-xl border border-nordic-muted mb-6">
+    <h4 className="font-bold text-nordic-slate dark:text-white dark:text-white flex items-center gap-2 mb-3 text-sm">
       <BookOpen size={16} className="text-nordic-blue" />
       Guide: Yield-to-Tax & Thesis Trace
     </h4>
     <div className="grid md:grid-cols-2 gap-6 text-xs text-nordic-charcoal leading-relaxed">
       <div className="space-y-3">
         <div>
-          <strong className="text-nordic-slate block mb-0.5">Yield-to-Tax (Net Yield)</strong>
+          <strong className="text-nordic-slate dark:text-white dark:text-white block mb-0.5">Yield-to-Tax (Net Yield)</strong>
           <p className="text-gray-500">The actual dividend return you keep after taxes. Calculated as <code>Gross Yield × (1 - Tax Rate)</code>.</p>
         </div>
         <div>
-          <strong className="text-nordic-slate block mb-0.5">Tax Drag</strong>
+          <strong className="text-nordic-slate dark:text-white dark:text-white block mb-0.5">Tax Drag</strong>
           <p className="text-gray-500">The percentage of return lost to tax inefficiency. <span className="italic text-nordic-terra">High Drag</span> means the asset belongs in a tax-advantaged account (IRA/401k).</p>
         </div>
         <div>
-           <strong className="text-nordic-slate block mb-0.5">Non-Qualified vs. Qualified</strong>
+           <strong className="text-nordic-slate dark:text-white dark:text-white block mb-0.5">Non-Qualified vs. Qualified</strong>
            <p className="text-gray-500">
              <strong>Qualified:</strong> Taxed at lower LTCG rates (0%, 15%, 20%). Requires holding stock &gt;60 days.<br/>
              <strong>Non-Qualified:</strong> Taxed as Ordinary Income (up to 37%). Common in REITs and BDCs.
@@ -70,7 +70,7 @@ const AlphaGuide = () => (
         </div>
       </div>
       <div className="space-y-3">
-        <div className="bg-white p-3 rounded border border-gray-200">
+        <div className=bg-white dark:bg-slate-800 p-3 rounded border border-gray-200">
           <strong className="text-nordic-sage block mb-1">Thesis Confidence Score (0-100)</strong>
           <p className="text-gray-500 mb-2">
             A subjective measure YOU define. It answers: <em>"Does the original reason I bought this still exist?"</em>
@@ -117,16 +117,16 @@ const HoldingRow: React.FC<HoldingRowProps> = ({ lot, onUpdate, onSell }) => {
   const isEfficient = efficiency > 80;
 
   return (
-    <div className={`bg-white rounded-xl border transition-all duration-300 ${expanded ? 'shadow-md border-nordic-blue' : 'shadow-sm border-gray-100 hover:border-gray-300'}`}>
+    <div className={`bg-white dark:bg-slate-800 rounded-xl border transition-all duration-300 ${expanded ? 'shadow-md border-nordic-blue' : 'shadow-sm border-gray-100 dark:border-slate-700 hover:border-gray-300'}`}>
       {/* HEADER ROW */}
       <div className="p-4 flex items-center justify-between cursor-pointer" onClick={() => !editing && setExpanded(!expanded)}>
         <div className="flex items-center gap-4 flex-1">
-           <div className={`p-2 rounded-lg ${lot.confidenceScore < 50 ? 'bg-red-50 text-nordic-terra' : 'bg-nordic-oatmeal text-nordic-slate'}`}>
+           <div className={`p-2 rounded-lg ${lot.confidenceScore < 50 ? 'bg-red-50 text-nordic-terra' : 'bg-nordic-oatmeal dark:bg-slate-900 text-nordic-slate dark:text-white dark:text-white'}`}>
               {lot.confidenceScore < 50 ? <AlertTriangle size={18} /> : <Activity size={18} />}
            </div>
 
            <div className="w-24">
-              <h4 className="font-bold text-nordic-slate text-sm">{lot.ticker}</h4>
+              <h4 className="font-bold text-nordic-slate dark:text-white dark:text-white text-sm">{lot.ticker}</h4>
               <span className="text-[10px] text-gray-400 uppercase font-medium">{lot.sector}</span>
            </div>
 
@@ -142,7 +142,7 @@ const HoldingRow: React.FC<HoldingRowProps> = ({ lot, onUpdate, onSell }) => {
 
            <div className="text-right">
               <p className="text-xs font-bold text-gray-400 uppercase">Net Yield</p>
-              <p className="text-sm font-black text-nordic-slate">{(lot.netYield * 100).toFixed(2)}%</p>
+              <p className="text-sm font-black text-nordic-slate dark:text-white dark:text-white">{(lot.netYield * 100).toFixed(2)}%</p>
            </div>
 
            <div className="text-right w-24">
@@ -171,12 +171,12 @@ const HoldingRow: React.FC<HoldingRowProps> = ({ lot, onUpdate, onSell }) => {
 
       {/* EXPANDED CONTENT */}
       {expanded && (
-        <div className="px-4 pb-4 pt-0 border-t border-gray-100 animate-fade-in">
+        <div className="px-4 pb-4 pt-0 border-t border-gray-100 dark:border-slate-700 animate-fade-in">
            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mt-4">
 
               {/* Left Column: Thesis */}
               <div className="md:col-span-7 space-y-4">
-                 <div className="bg-nordic-oatmeal p-3 rounded-lg border border-nordic-muted">
+                 <div className="bg-nordic-oatmeal dark:bg-slate-900 p-3 rounded-lg border border-nordic-muted">
                     <h5 className="text-[10px] font-bold text-gray-500 uppercase flex items-center gap-2 mb-2">
                        <BrainCircuit size={12} /> Buy Thesis
                     </h5>
@@ -204,7 +204,7 @@ const HoldingRow: React.FC<HoldingRowProps> = ({ lot, onUpdate, onSell }) => {
                              type="date"
                              value={editDate}
                              onChange={(e) => setEditDate(e.target.value)}
-                             className="w-full text-xs p-2 rounded border border-blue-200 text-nordic-slate focus:outline-none focus:ring-1 focus:ring-nordic-blue"
+                             className="w-full text-xs p-2 rounded border border-blue-200 text-nordic-slate dark:text-white focus:outline-none focus:ring-1 focus:ring-nordic-blue"
                           />
                        </div>
                        <div>
@@ -223,23 +223,23 @@ const HoldingRow: React.FC<HoldingRowProps> = ({ lot, onUpdate, onSell }) => {
                           <button onClick={saveEdits} className="flex-1 bg-nordic-blue text-white text-xs font-bold py-2 rounded-lg hover:bg-blue-600 transition-colors flex items-center justify-center gap-1">
                              <Save size={12} /> Save
                           </button>
-                          <button onClick={cancelEdits} className="flex-1 bg-white text-gray-500 border border-gray-200 text-xs font-bold py-2 rounded-lg hover:bg-gray-50 transition-colors">
+                          <button onClick={cancelEdits} className="flex-1 bg-white dark:bg-slate-800 text-gray-500 border border-gray-200 text-xs font-bold py-2 rounded-lg hover:bg-gray-50 transition-colors">
                              Cancel
                           </button>
                        </div>
                     </div>
                  ) : (
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="bg-gray-50 p-2 rounded border border-gray-100">
+                        <div className="bg-gray-50 p-2 rounded border border-gray-100 dark:border-slate-700">
                            <span className="text-[10px] text-gray-400 font-bold uppercase block mb-1">Holding Age</span>
-                           <div className="flex items-center gap-2 text-nordic-slate font-mono text-sm font-bold">
+                           <div className="flex items-center gap-2 text-nordic-slate dark:text-white font-mono text-sm font-bold">
                               <Calendar size={14} className="text-gray-400" />
                               {getDaysHeld(lot.purchaseDate)} days
                            </div>
                         </div>
-                        <div className="bg-gray-50 p-2 rounded border border-gray-100">
+                        <div className="bg-gray-50 p-2 rounded border border-gray-100 dark:border-slate-700">
                            <span className="text-[10px] text-gray-400 font-bold uppercase block mb-1">Tax Status</span>
-                           <div className="flex items-center gap-2 text-nordic-slate text-xs font-bold">
+                           <div className="flex items-center gap-2 text-nordic-slate dark:text-white text-xs font-bold">
                               <Hash size={14} className="text-gray-400" />
                               {lot.dividendType}
                            </div>
@@ -618,10 +618,10 @@ export const AlphaEngine: React.FC = () => {
   }, [metrics, isStressTestActive]);
 
   return (
-    <div className="flex flex-col md:flex-row h-full bg-nordic-oatmeal overflow-hidden relative">
+    <div className="flex flex-col md:flex-row h-full bg-nordic-oatmeal dark:bg-slate-900 overflow-hidden relative">
 
       {/* Mobile View Toggle */}
-      <div className="md:hidden flex border-b border-gray-200 bg-white z-20 shrink-0">
+      <div className="md:hidden flex border-b border-gray-200 bg-white dark:bg-slate-800 z-20 shrink-0">
          <button
             onClick={() => setMobileView('controls')}
             className={`flex-1 py-3 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 ${mobileView === 'controls' ? 'text-nordic-blue border-b-2 border-nordic-blue bg-blue-50/50' : 'text-gray-400'}`}
@@ -637,12 +637,12 @@ export const AlphaEngine: React.FC = () => {
       </div>
 
       {/* SIDEBAR: Global Assumptions */}
-      <aside className={`w-full md:w-[450px] bg-white border-r border-nordic-muted flex flex-col h-full shadow-soft z-10 transition-transform md:translate-x-0 ${mobileView === 'controls' ? 'translate-x-0 block' : '-translate-x-full hidden md:flex'}`}>
+      <aside className={`w-full md:w-[450px] bg-white dark:bg-slate-800 border-r border-nordic-muted flex flex-col h-full shadow-soft z-10 transition-transform md:translate-x-0 ${mobileView === 'controls' ? 'translate-x-0 block' : '-translate-x-full hidden md:flex'}`}>
          {/* Sidebar Header */}
-         <div className="p-6 pb-4 border-b border-gray-100 flex-shrink-0">
+         <div className="p-6 pb-4 border-b border-gray-100 dark:border-slate-700 flex-shrink-0">
             <div className="flex items-center gap-2 mb-4">
                <Sliders size={18} className="text-nordic-sage" />
-               <h3 className="text-base font-bold uppercase tracking-wider text-nordic-slate">Strategic Controls</h3>
+               <h3 className="text-base font-bold uppercase tracking-wider text-nordic-slate dark:text-white">Strategic Controls</h3>
             </div>
             <p className="text-xs text-nordic-charcoal leading-relaxed">
                Calibrate your risk reality and validate thesis integrity against market conditions.
@@ -657,7 +657,7 @@ export const AlphaEngine: React.FC = () => {
                <div className="flex justify-between items-center mb-2">
                   <div className="flex items-center gap-2">
                      <ShieldCheck size={14} className={validationState.status === 'Verified' ? 'text-nordic-sage' : 'text-nordic-terra'} />
-                     <span className="text-xs font-bold uppercase text-nordic-slate">Edge Confidence</span>
+                     <span className="text-xs font-bold uppercase text-nordic-slate dark:text-white">Edge Confidence</span>
                   </div>
                   <span className={`text-xs font-black ${validationState.score > 80 ? 'text-nordic-sage' : 'text-nordic-terra'}`}>
                      {validationState.score}%
@@ -672,7 +672,7 @@ export const AlphaEngine: React.FC = () => {
                {validationState.issues.length > 0 ? (
                   <div className="space-y-2">
                      {validationState.issues.slice(0, 2).map(issue => (
-                        <div key={issue.id} className="text-[10px] bg-white p-2 rounded border border-gray-200 shadow-sm flex items-start gap-2">
+                        <div key={issue.id} className="text-[10px] bg-white dark:bg-slate-800 p-2 rounded border border-gray-200 shadow-sm flex items-start gap-2">
                            {issue.severity === 'Error' ? <XCircle size={10} className="text-nordic-terra mt-0.5"/> : <AlertCircle size={10} className="text-yellow-500 mt-0.5"/>}
                            <div>
                               <p className="font-bold text-gray-600 leading-tight">{issue.message}</p>
@@ -702,7 +702,7 @@ export const AlphaEngine: React.FC = () => {
                            <strong>Short-Term Capital Gains:</strong> Tax on assets held less than 1 year. usually taxed at your ordinary income rate (High).
                         </div>
                      </div>
-                     <span className="text-nordic-slate">{(assumptions.stcgRate * 100).toFixed(0)}%</span>
+                     <span className="text-nordic-slate dark:text-white">{(assumptions.stcgRate * 100).toFixed(0)}%</span>
                   </div>
                   <input
                     type="range" min="10" max="50" step="1"
@@ -720,7 +720,7 @@ export const AlphaEngine: React.FC = () => {
                            Reduces future purchasing power. A $100 gain with 3% inflation is only worth $97 in real terms next year.
                         </div>
                      </div>
-                     <span className="text-nordic-slate">{(assumptions.inflation * 100).toFixed(1)}%</span>
+                     <span className="text-nordic-slate dark:text-white">{(assumptions.inflation * 100).toFixed(1)}%</span>
                   </div>
                   <input
                     type="range" min="0" max="15" step="0.5"
@@ -732,11 +732,11 @@ export const AlphaEngine: React.FC = () => {
             </div>
 
             {/* Human Capital */}
-            <div className="space-y-3 pt-6 border-t border-gray-100">
+            <div className="space-y-3 pt-6 border-t border-gray-100 dark:border-slate-700">
                <div className="flex items-start gap-2">
                   <Briefcase size={16} className="text-nordic-blue mt-0.5" />
                   <div>
-                     <label className="text-xs font-bold text-nordic-slate uppercase">Human Capital Hedging</label>
+                     <label className="text-xs font-bold text-nordic-slate dark:text-white uppercase">Human Capital Hedging</label>
                      <p className="text-[10px] text-gray-400 mt-1 leading-relaxed">
                         What industry do you work in? We treat your future salary as a "Bond" in that sector to reveal hidden concentration risks.
                      </p>
@@ -746,7 +746,7 @@ export const AlphaEngine: React.FC = () => {
                <select
                   value={assumptions.humanCapitalSector}
                   onChange={(e) => setAssumptions({...assumptions, humanCapitalSector: e.target.value})}
-                  className="w-full bg-nordic-oatmeal border border-gray-200 rounded p-2 text-sm font-bold text-nordic-slate outline-none focus:ring-1 focus:ring-nordic-blue"
+                  className="w-full bg-nordic-oatmeal dark:bg-slate-900 border border-gray-200 rounded p-2 text-sm font-bold text-nordic-slate dark:text-white outline-none focus:ring-1 focus:ring-nordic-blue"
                >
                   <option value="Technology">Technology</option>
                   <option value="Aviation/Defense">Aviation & Defense</option>
@@ -769,7 +769,7 @@ export const AlphaEngine: React.FC = () => {
             </div>
 
             {/* Tactical Sell List (Mini Sidebar View) */}
-            <div className="mt-8 pt-6 border-t border-gray-100">
+            <div className="mt-8 pt-6 border-t border-gray-100 dark:border-slate-700">
                <div className="flex justify-between items-center mb-1">
                   <h4 className="text-xs font-black uppercase text-nordic-terra flex items-center gap-2">
                      <Zap size={14} /> Tactical Harvest List
@@ -793,7 +793,7 @@ export const AlphaEngine: React.FC = () => {
                         className="bg-gray-50 p-2 rounded border border-gray-200 hover:border-nordic-terra transition-colors cursor-pointer group"
                      >
                         <div className="flex justify-between items-center mb-1">
-                           <span className="font-bold text-xs text-nordic-slate">{lot.ticker}</span>
+                           <span className="font-bold text-xs text-nordic-slate dark:text-white">{lot.ticker}</span>
                            <button
                                 onClick={(e) => {
                                     e.stopPropagation();
@@ -824,7 +824,7 @@ export const AlphaEngine: React.FC = () => {
          </div>
 
          {/* Added Footer to Sidebar */}
-         <div className="p-4 border-t border-gray-100 bg-gray-50 flex-shrink-0 text-center">
+         <div className="p-4 border-t border-gray-100 dark:border-slate-700 bg-gray-50 flex-shrink-0 text-center">
             <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest flex items-center justify-center gap-1 mb-1">
                <Shield size={10} /> Portfolio Sim
             </p>
@@ -852,7 +852,7 @@ export const AlphaEngine: React.FC = () => {
         <div className="mb-6 bg-blue-50 border border-blue-100 rounded-lg p-3 flex items-center justify-between">
             <div className="flex items-center gap-3">
                <Info size={16} className="text-nordic-blue" />
-               <p className="text-xs text-nordic-slate font-medium">
+               <p className="text-xs text-nordic-slate dark:text-white font-medium">
                   <strong>Simulated Portfolio Active:</strong> Displaying analysis on sample data (NVDA, O, LMT).
                   <span className="hidden sm:inline text-gray-500 font-normal ml-1">Connect your brokerage to see your real holdings.</span>
                </p>
@@ -868,12 +868,12 @@ export const AlphaEngine: React.FC = () => {
         {/* Header - Editorial Style */}
         <div className="flex flex-col xl:flex-row justify-between items-start xl:items-end mb-10 gap-6">
           <div>
-             <h2 className="text-4xl font-light text-nordic-slate mb-3 tracking-tight">Portfolio Strategy & Tax Optimizer</h2>
+             <h2 className="text-4xl font-light text-nordic-slate dark:text-white mb-3 tracking-tight">Portfolio Strategy & Tax Optimizer</h2>
              <p className="text-nordic-charcoal max-w-xl text-base leading-relaxed">
                 Optimize your after-tax returns and validate your investment logic. Monitor sector risks, tax drag, and thesis drift.
              </p>
           </div>
-          <div className={`px-4 py-2 rounded-full border border-gray-200 text-sm font-bold flex items-center gap-2 shadow-sm ${validationState.status === 'Verified' ? 'bg-white text-nordic-sage' : 'bg-yellow-50 text-yellow-700'}`}>
+          <div className={`px-4 py-2 rounded-full border border-gray-200 text-sm font-bold flex items-center gap-2 shadow-sm ${validationState.status === 'Verified' ? 'bg-white dark:bg-slate-800 text-nordic-sage' : 'bg-yellow-50 text-yellow-700'}`}>
              {validationState.status === 'Verified' ? <CheckCircle2 size={16}/> : <AlertCircle size={16}/>}
              {validationState.status === 'Verified' ? 'Data Integrity Verified' : 'Data Warnings Active'}
           </div>
@@ -885,12 +885,12 @@ export const AlphaEngine: React.FC = () => {
           <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
              {/* ... Risk Console and Sector Concentration (Unchanged) ... */}
              {/* MODULE: RISK CONSOLE (Enhanced) */}
-             <div className="bg-white p-8 rounded-2xl shadow-card border border-transparent flex flex-col justify-between relative overflow-hidden group hover:shadow-lg transition-all">
+             <div className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-card border border-transparent flex flex-col justify-between relative overflow-hidden group hover:shadow-lg transition-all">
                  <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
                     <ShieldAlert size={100} />
                  </div>
                  <div className="mb-4">
-                    <h3 className="text-sm font-black uppercase tracking-widest text-nordic-slate mb-2 flex items-center gap-2">
+                    <h3 className="text-sm font-black uppercase tracking-widest text-nordic-slate dark:text-white mb-2 flex items-center gap-2">
                        <Activity size={16} className="text-nordic-terra" /> Risk Console
                     </h3>
                     <p className="text-xs text-gray-400">Monthly Value at Risk & Tail Events</p>
@@ -900,7 +900,7 @@ export const AlphaEngine: React.FC = () => {
                     {/* VaR */}
                     <div>
                        <div className="flex items-baseline gap-1">
-                          <span className="text-2xl font-black text-nordic-slate tracking-tighter">
+                          <span className="text-2xl font-black text-nordic-slate dark:text-white tracking-tighter">
                              {formatCurrency(VaR95)}
                           </span>
                        </div>
@@ -920,10 +920,10 @@ export const AlphaEngine: React.FC = () => {
                  </div>
 
                  {/* Liquidity Buffer Check */}
-                 <div className="bg-gray-50 rounded-xl p-4 border border-gray-100 relative z-10 space-y-3">
+                 <div className="bg-gray-50 rounded-xl p-4 border border-gray-100 dark:border-slate-700 relative z-10 space-y-3">
                     <div className="flex justify-between items-center text-xs">
                        <span className="font-bold text-gray-500 uppercase flex items-center gap-1"><Lock size={12}/> Liquid Cash</span>
-                       <span className="font-mono font-bold text-nordic-slate">{formatCurrency(baseMetrics.liquidCash)}</span>
+                       <span className="font-mono font-bold text-nordic-slate dark:text-white">{formatCurrency(baseMetrics.liquidCash)}</span>
                     </div>
 
                     {/* Coverage Bars */}
@@ -957,10 +957,10 @@ export const AlphaEngine: React.FC = () => {
              </div>
 
              {/* MODULE: HUMAN CAPITAL CONCENTRATION */}
-             <div className="lg:col-span-2 bg-white p-8 rounded-2xl shadow-card border border-transparent hover:shadow-lg transition-all">
+             <div className="lg:col-span-2 bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-card border border-transparent hover:shadow-lg transition-all">
                  <div className="flex justify-between items-start mb-8">
                     <div>
-                        <h3 className="text-sm font-black uppercase tracking-widest text-nordic-slate flex items-center gap-2">
+                        <h3 className="text-sm font-black uppercase tracking-widest text-nordic-slate dark:text-white flex items-center gap-2">
                            <Briefcase size={16} className="text-nordic-blue" /> Sector Concentration
                         </h3>
                         <p className="text-xs text-gray-400 mt-1">Portfolio + Human Capital Exposure</p>
@@ -1000,7 +1000,7 @@ export const AlphaEngine: React.FC = () => {
                     </ResponsiveContainer>
                  </div>
 
-                 <div className="mt-4 text-xs text-gray-400 italic bg-nordic-oatmeal p-3 rounded-lg border border-nordic-muted flex items-start gap-2">
+                 <div className="mt-4 text-xs text-gray-400 italic bg-nordic-oatmeal dark:bg-slate-900 p-3 rounded-lg border border-nordic-muted flex items-start gap-2">
                     <Info size={14} className="mt-0.5 text-nordic-blue" />
                     <span>
                        *Total exposure includes a 5x salary capitalization in your Human Capital sector.
@@ -1015,14 +1015,14 @@ export const AlphaEngine: React.FC = () => {
           </section>
 
           {/* ROW 2: YIELD OPTIMIZER & THESIS LOGIC TRACE */}
-          <section className="bg-white p-8 rounded-2xl shadow-card border border-transparent">
+          <section className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-card border border-transparent">
              <div className="flex items-center justify-between mb-8">
                  <div className="flex items-center gap-3">
-                     <div className="bg-nordic-oatmeal p-2 rounded text-nordic-slate">
+                     <div className="bg-nordic-oatmeal dark:bg-slate-900 p-2 rounded text-nordic-slate dark:text-white">
                         <Target size={20} />
                      </div>
                      <div>
-                        <h3 className="text-lg font-bold text-nordic-slate">Yield-to-Tax & Thesis Trace</h3>
+                        <h3 className="text-lg font-bold text-nordic-slate dark:text-white">Yield-to-Tax & Thesis Trace</h3>
                         <p className="text-xs text-gray-400">Efficiency Audit & Logic Validation</p>
                      </div>
                  </div>
@@ -1043,14 +1043,14 @@ export const AlphaEngine: React.FC = () => {
           </section>
 
           {/* ROW 3: HEATMAP with SENSITIVITY OVERLAY */}
-          <section className="bg-white p-8 rounded-2xl shadow-card border border-transparent">
+          <section className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-card border border-transparent">
              <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
                  <div className="flex items-center gap-3">
-                     <div className="bg-nordic-oatmeal p-2 rounded text-nordic-slate">
+                     <div className="bg-nordic-oatmeal dark:bg-slate-900 p-2 rounded text-nordic-slate dark:text-white">
                         <Thermometer size={20} />
                      </div>
                      <div>
-                        <h3 className="text-lg font-bold text-nordic-slate">Tax Drag Heatmap</h3>
+                        <h3 className="text-lg font-bold text-nordic-slate dark:text-white">Tax Drag Heatmap</h3>
                         <p className="text-xs text-gray-400">Capital Recovery Projection</p>
                      </div>
                  </div>
@@ -1058,7 +1058,7 @@ export const AlphaEngine: React.FC = () => {
                  {/* Sensitivity Toggle */}
                  <button
                     onClick={() => setIsStressTestActive(!isStressTestActive)}
-                    className={`text-xs font-bold px-4 py-2 rounded-lg border transition-all flex items-center gap-2 ${isStressTestActive ? 'bg-nordic-terra text-white border-nordic-terra shadow-md' : 'bg-white text-gray-500 border-gray-200 hover:bg-gray-50'}`}
+                    className={`text-xs font-bold px-4 py-2 rounded-lg border transition-all flex items-center gap-2 ${isStressTestActive ? 'bg-nordic-terra text-white border-nordic-terra shadow-md' : 'bg-white dark:bg-slate-800 text-gray-500 border-gray-200 hover:bg-gray-50'}`}
                  >
                     {isStressTestActive ? <Eye size={14} /> : <Eye size={14} className="opacity-50" />}
                     {isStressTestActive ? 'Hide Validation Shadow' : 'Show Stress-Test Overlay'}
@@ -1119,7 +1119,7 @@ export const AlphaEngine: React.FC = () => {
           {/* DOCUMENTATION SECTION */}
           <div className="mt-16 pt-8 border-t border-gray-200">
               <details className="text-sm text-gray-400 cursor-pointer group">
-                <summary className="hover:text-nordic-slate transition-colors font-bold list-none flex items-center gap-2">
+                <summary className="hover:text-nordic-slate dark:text-white transition-colors font-bold list-none flex items-center gap-2">
                   <div className="bg-gray-200 p-1 rounded group-hover:bg-nordic-slate group-hover:text-white transition-colors">
                       <BookOpen size={12} />
                   </div>
@@ -1128,8 +1128,8 @@ export const AlphaEngine: React.FC = () => {
 
                 <div className="mt-6 pl-2 grid md:grid-cols-2 gap-8 text-xs leading-relaxed animate-fade-in">
                    <div className="space-y-4">
-                      <div className="bg-white p-3 rounded-lg border border-gray-100">
-                        <h4 className="font-bold text-nordic-slate uppercase mb-1 flex items-center gap-2">
+                      <div className="bg-white dark:bg-slate-800 p-3 rounded-lg border border-gray-100 dark:border-slate-700">
+                        <h4 className="font-bold text-nordic-slate dark:text-white uppercase mb-1 flex items-center gap-2">
                            <ShieldAlert size={12} className="text-nordic-terra" /> STCG (Short-Term Capital Gains)
                         </h4>
                         <p className="text-gray-500">
@@ -1139,7 +1139,7 @@ export const AlphaEngine: React.FC = () => {
                       </div>
 
                       <div>
-                         <h4 className="font-bold text-nordic-slate uppercase mb-1 flex items-center gap-2">
+                         <h4 className="font-bold text-nordic-slate dark:text-white uppercase mb-1 flex items-center gap-2">
                             <Zap size={12} className="text-nordic-sage" /> Tactical Harvest List (Tax Loss)
                          </h4>
                          <p className="text-gray-500">
@@ -1151,7 +1151,7 @@ export const AlphaEngine: React.FC = () => {
 
                    <div className="space-y-4">
                       <div>
-                         <h4 className="font-bold text-nordic-slate uppercase mb-1 flex items-center gap-2">
+                         <h4 className="font-bold text-nordic-slate dark:text-white uppercase mb-1 flex items-center gap-2">
                             <Briefcase size={12} className="text-nordic-blue" /> Human Capital Hedging
                          </h4>
                          <p className="text-gray-500">
@@ -1162,21 +1162,21 @@ export const AlphaEngine: React.FC = () => {
                       </div>
 
                        <div>
-                         <h4 className="font-bold text-nordic-slate uppercase mb-1 flex items-center gap-2">
-                            <BrainCircuit size={12} className="text-nordic-slate" /> Thesis Drift Monitor
+                         <h4 className="font-bold text-nordic-slate dark:text-white uppercase mb-1 flex items-center gap-2">
+                            <BrainCircuit size={12} className="text-nordic-slate dark:text-white" /> Thesis Drift Monitor
                          </h4>
                          <p className="text-gray-500">
                             Behavioral edge comes from knowing <em>why</em> you own something. The engine tracks your "Buy Thesis".
-                            <br/><span className="italic text-nordic-slate">Action:</span> If price moves +/- 5% and you haven't re-confirmed your thesis in 90 days, it's flagged. Don't "Zombie Hold".
+                            <br/><span className="italic text-nordic-slate dark:text-white">Action:</span> If price moves +/- 5% and you haven't re-confirmed your thesis in 90 days, it's flagged. Don't "Zombie Hold".
                          </p>
                       </div>
                    </div>
                 </div>
 
-                <div className="mt-6 bg-nordic-oatmeal p-4 rounded-xl border border-nordic-muted flex items-start gap-3">
+                <div className="mt-6 bg-nordic-oatmeal dark:bg-slate-900 p-4 rounded-xl border border-nordic-muted flex items-start gap-3">
                    <Lightbulb size={18} className="text-nordic-blue mt-0.5 flex-shrink-0" />
                    <div>
-                      <h4 className="font-bold text-nordic-slate text-xs uppercase mb-1">Quick Start Workflow</h4>
+                      <h4 className="font-bold text-nordic-slate dark:text-white text-xs uppercase mb-1">Quick Start Workflow</h4>
                       <ol className="list-decimal list-inside text-xs text-gray-500 space-y-1">
                          <li><strong>Set Assumptions:</strong> In the sidebar, set your Tax Rate and Job Sector.</li>
                          <li><strong>Check Concentration:</strong> Look at the "Sector Concentration" chart. Is the Total bar (Blue + Red) too high?</li>
@@ -1193,14 +1193,14 @@ export const AlphaEngine: React.FC = () => {
         {/* LOGIC TRACE MODAL */}
         {showLogicTrace && (
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-nordic-slate/80 backdrop-blur-sm animate-fade-in">
-                <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden border border-gray-200">
+                <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden border border-gray-200">
                     {(() => {
                         const lot = lots.find(l => l.id === showLogicTrace);
                         if (!lot) return null;
                         return (
                             <>
-                            <div className="bg-nordic-oatmeal p-5 border-b border-gray-200 flex justify-between items-center">
-                                <h3 className="text-base font-black uppercase text-nordic-slate flex items-center gap-2">
+                            <div className="bg-nordic-oatmeal dark:bg-slate-900 p-5 border-b border-gray-200 flex justify-between items-center">
+                                <h3 className="text-base font-black uppercase text-nordic-slate dark:text-white flex items-center gap-2">
                                     <BrainCircuit size={18} className="text-nordic-blue" /> Logic Trace: {lot.ticker}
                                 </h3>
                                 <button onClick={() => setShowLogicTrace(null)}><X size={20} className="text-gray-400 hover:text-nordic-terra transition-colors" /></button>
@@ -1214,7 +1214,7 @@ export const AlphaEngine: React.FC = () => {
                                     <p className="text-xs font-bold text-nordic-blue uppercase mb-2 flex items-center gap-2">
                                         <Sparkles size={14} /> Evidence Trail
                                     </p>
-                                    <p className="text-sm text-nordic-slate font-medium leading-relaxed">"{lot.thesisEvidence || "No specific evidence logged."}"</p>
+                                    <p className="text-sm text-nordic-slate dark:text-white font-medium leading-relaxed">"{lot.thesisEvidence || "No specific evidence logged."}"</p>
                                     <div className="mt-4 pt-3 border-t border-nordic-blue/10 text-[10px] text-gray-500 flex justify-between font-medium">
                                         <span>Source: 10-Q Filing / Earnings Call</span>
                                         <span>Verified: {lot.lastThesisUpdate}</span>
@@ -1238,10 +1238,10 @@ export const AlphaEngine: React.FC = () => {
         {/* PORTFOLIO MANAGER MODAL */}
         {isManagerOpen && (
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-nordic-slate/80 backdrop-blur-sm animate-fade-in">
-                <div className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl h-[90vh] flex flex-col overflow-hidden border border-gray-200">
-                    <div className="bg-white p-5 border-b border-gray-100 flex justify-between items-center shadow-sm z-10">
+                <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl w-full max-w-4xl h-[90vh] flex flex-col overflow-hidden border border-gray-200">
+                    <div className=bg-white dark:bg-slate-800 p-5 border-b border-gray-100 dark:border-slate-700 flex justify-between items-center shadow-sm z-10">
                         <div>
-                           <h3 className="text-xl font-black text-nordic-slate flex items-center gap-2">
+                           <h3 className="text-xl font-black text-nordic-slate dark:text-white flex items-center gap-2">
                                <Briefcase size={22} className="text-nordic-blue" /> Portfolio Ledger
                            </h3>
                            <p className="text-xs text-gray-400 mt-1">Manage simulation holdings and cost basis.</p>
@@ -1251,8 +1251,8 @@ export const AlphaEngine: React.FC = () => {
                         </button>
                     </div>
 
-                    <div className="flex-1 overflow-y-auto custom-scrollbar p-6 bg-nordic-oatmeal">
-                        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    <div className="flex-1 overflow-y-auto custom-scrollbar p-6 bg-nordic-oatmeal dark:bg-slate-900">
+                        <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                            <table className="w-full text-xs text-left">
                               <thead className="bg-gray-50 border-b border-gray-200 text-gray-500 font-bold uppercase tracking-wider">
                                  <tr>
@@ -1268,7 +1268,7 @@ export const AlphaEngine: React.FC = () => {
                               <tbody className="divide-y divide-gray-100">
                                  {lots.map(lot => (
                                     <tr key={lot.id} className="hover:bg-blue-50/50 transition-colors">
-                                       <td className="px-4 py-2 font-bold text-nordic-slate">
+                                       <td className="px-4 py-2 font-bold text-nordic-slate dark:text-white">
                                           <div className="flex items-center gap-1">
                                               <input
                                                  value={lot.ticker}
@@ -1359,7 +1359,7 @@ export const AlphaEngine: React.FC = () => {
                         </div>
                     </div>
 
-                    <div className="bg-white p-5 border-t border-gray-100 flex justify-between items-center z-10 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+                    <div className="bg-white dark:bg-slate-800 p-5 border-t border-gray-100 dark:border-slate-700 flex justify-between items-center z-10 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
                        <button
                           onClick={handleAddLot}
                           className="flex items-center gap-2 text-nordic-blue font-bold text-sm bg-blue-50 px-4 py-2.5 rounded-lg hover:bg-blue-100 transition-colors"

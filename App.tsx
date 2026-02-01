@@ -925,7 +925,7 @@ const App: React.FC = () => {
                    <Shield size={10} /> Portfolio Sim
                 </p>
                 <p className="text-[9px] text-gray-300 dark:text-gray-600">
-                   © 2026 T. Cooney | Financial Simulation Tool | Not Financial Advice
+                   © 2026 Timmy C. | Financial Simulation Tool | Not Financial Advice
                 </p>
             </div>
           </aside>

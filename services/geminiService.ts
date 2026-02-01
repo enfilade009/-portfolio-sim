@@ -7,11 +7,11 @@ export const getWealthInsights = async (
   assets: AssetParams[],
   endYearData: SimulationYearResult
 ): Promise<string> => {
-  if (!process.env.API_KEY) {
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  if (!apiKey) {
     return "API Key missing. Cannot generate AI insights.";
   }
-
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const ai = new GoogleGenAI({ apiKey });
   
   const assetMixStr = assets.map(a => `${a.category}: ${a.weight}%`).join(', ');
   
